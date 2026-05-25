@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Henry Efe MLG</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background:#0f0f0f;
+        color:white;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        overflow:hidden;
+    }
+
+    .card{
+        width:350px;
+        background:#1b1b1b;
+        border:2px solid orange;
+        border-radius:25px;
+        padding:30px;
+        text-align:center;
+        box-shadow:0 0 25px rgba(255,140,0,0.4);
+        animation:fadeIn 0.5s ease;
+    }
+
+    h1{
+        font-size:38px;
+        margin-bottom:10px;
+        letter-spacing:2px;
+    }
+
+    .line{
+        width:100%;
+        height:2px;
+        background:white;
+        margin:20px 0;
+        opacity:0.3;
+    }
+
+    .code{
+        font-size:18px;
+        word-break:break-word;
+        margin-bottom:20px;
+        color:#ffb347;
+    }
+
+    button{
+        width:100%;
+        padding:15px;
+        margin-top:15px;
+        border:none;
+        border-radius:15px;
+        background:#ff8800;
+        color:white;
+        font-size:18px;
+        cursor:pointer;
+        transition:0.2s;
+        font-weight:bold;
+    }
+
+    button:hover{
+        transform:scale(1.03);
+    }
+
+    button.active{
+        background:#00c853;
+    }
+
+    @keyframes fadeIn{
+        from{
+            opacity:0;
+            transform:translateY(20px);
+        }
+        to{
+            opacity:1;
+            transform:translateY(0);
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>Henry Efe MLG</h1>
+
+    <div class="line"></div>
+
+    <div class="code" id="copyText">
+        CSGO-6uKRJ-4KCdj-uEDp8-s2DFE-BdaAB
+    </div>
+
+    <button id="copyBtn">
+        Kopyala
+    </button>
+
+    <button id="tradeBtn">
+        Takas Linki
+    </button>
+
+    <button id="youtubeBtn">
+        YouTube Linki
+    </button>
+
+    <button id="steamBtn">
+        Steam Linki
+    </button>
+
+</div>
+
+<audio id="clickSound">
+    <source src="sound.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+const sound = document.getElementById("clickSound");
+
+function playSound(){
+    sound.currentTime = 0;
+    sound.play();
+}
+
+function redirectAfterSound(button, text, link){
+
+    playSound();
+
+    button.classList.add("active");
+    button.innerHTML = text;
+
+    sound.onended = () => {
+        window.location.href = link;
+    };
+
+}
+
+const copyBtn = document.getElementById("copyBtn");
+
+copyBtn.addEventListener("click", async () => {
+
+    const text =
+    "CSGO-6uKRJ-4KCdj-uEDp8-s2DFE-BdaAB";
+
+    await navigator.clipboard.writeText(text);
+
+    playSound();
+
+    copyBtn.classList.add("active");
+    copyBtn.innerHTML = "Kopyalandı ✔";
+
+    setTimeout(() => {
+        copyBtn.classList.remove("active");
+        copyBtn.innerHTML = "Kopyala";
+    }, 1200);
+
+});
+
+const tradeBtn = document.getElementById("tradeBtn");
+
+tradeBtn.addEventListener("click", () => {
+
+    redirectAfterSound(
+        tradeBtn,
+        "Yönlendiriliyor...",
+        "https://steamcommunity.com/tradeoffer/new/?partner=1090155531&token=YwkWXGVX"
+    );
+
+});
+
+const youtubeBtn = document.getElementById("youtubeBtn");
+
+youtubeBtn.addEventListener("click", () => {
+
+    redirectAfterSound(
+        youtubeBtn,
+        "Açılıyor...",
+        "https://www.youtube.com/@henry_efemlg"
+    );
+
+});
+
+const steamBtn = document.getElementById("steamBtn");
+
+steamBtn.addEventListener("click", () => {
+
+    redirectAfterSound(
+        steamBtn,
+        "Açılıyor...",
+        "https://steamcommunity.com/id/henryefe/"
+    );
+
+});
+
+</script>
+
+</body>
+</html>
